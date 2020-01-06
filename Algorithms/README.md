@@ -157,4 +157,77 @@ int main(){
 ``` 
 
 
-4. 
+4. *Quicksort*
+
+> In the first swap pivot is at its proper position, all the elements to its left are smaller while elements on right
+are greater but not necessarily in sorted order.\
+Some elements are swapped in this process
+
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+
+
+
+int partitions(int a[],int low,int up){
+    int pivot=a[low];
+    int i=low+1;
+    int j=up;
+
+    while(i<=j){
+        while(a[i]<pivot && i<j){
+            i=i+1;
+        }
+        while(a[j]>pivot){
+            j=j-1;
+        }
+        if(i<j){
+            swap(a[i],a[j]);
+            i+=1;
+            j+=1;
+        }
+        else{
+            break;
+        }
+    }
+    a[low]=a[j];
+    a[j]=pivot;
+
+    return j;
+
+}
+void quickSort(int a[],int low,int up){
+    int p;
+    if (low>=up)
+        return;
+    else{
+
+        p=partitions(a,low,up);
+        quickSort(a,low,p-1);
+        quickSort(a,p+1,up);
+    }
+}
+
+
+void display(int a[],int n){
+
+    for(int i=0;i<n;i++){
+        cout<<a[i]<<"   ";
+    }
+}
+
+
+int main(){
+
+    int a[]={12,4,11,24,5,1,43};
+    quickSort(a,0,(sizeof(a)/sizeof(a[0])));
+    display(a,(sizeof(a)/sizeof(a[0])));
+
+    return 0;
+}
+
+
+```

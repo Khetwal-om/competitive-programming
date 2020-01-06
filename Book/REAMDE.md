@@ -1393,3 +1393,467 @@ int main(){
 12        34        10        23        56        11        1        22
 
 ```
+
+
+
+# Set iterators
+
+---
+
+1. Basic example
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    set<int> s;
+
+    s.insert(3);
+    s.insert(6);
+    s.insert(9);
+    s.insert(12);
+
+    set<int>::iterator it=s.begin();
+    cout<<*it;
+
+    return 0;
+}
+
+```
+
+
+
+2. Shorter and better approach
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    set<int> s;
+    s.insert(19);
+    s.insert(111);
+    s.insert(12);
+    s.insert(29);
+    s.insert(31);
+
+    auto it=s.begin();
+    cout<<endl<<*it;
+
+    return 0;
+}
+
+```
+
+
+3. The output is weird in second case
+
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    set<int> s;
+    s.insert(19);
+    s.insert(111);
+    s.insert(12);
+    s.insert(29);
+    s.insert(31);
+    s.insert(199);
+    s.insert(9);
+
+    for(auto it=s.begin();it!=s.end();it++){
+        cout<<*it<<"       ";
+    }
+    cout<<"        "<<endl;
+
+    for(auto i=s.end();i!=s.begin();--i){
+        cout<<*i<<"       ";
+    }
+    return 0;
+}
+
+9       12       19       29       31       111       199
+7       199       111       31       29       19       12
+
+
+
+```
+
+
+
+4. This finds element nearest to x, *something is wrong*
+
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    set<int> s;
+    s.insert(1);
+    s.insert(11);
+    s.insert(28);
+    s.insert(30);
+    s.insert(31);
+    s.insert(34);
+    s.insert(41);
+    s.insert(55);
+
+    int x=39;
+    auto it=s.lower_bound(x);
+
+
+    if(it==s.begin()){
+        cout<<" found at starting "<<*it;
+    }
+    else if(it==s.end()){
+        it--;
+        cout<<" found at last "<<*it;
+    }
+
+    else{
+        int a=*it;
+        it--;
+        int b=*it;
+
+        if(x-b<a-x){
+            cout<<b;
+        }
+        else{
+            cout<<a;
+        }
+    }
+
+
+    return 0;
+}
+
+```
+
+
+
+
+
+# Bitset
+
+
+---
+
+
+
+1. A bitset is an array whose each value is either 0 or 1. 
+
+**The beneﬁt of using bitsets is that they require less memory than ordinary arrays, because each element in a bitset only uses one bit of memory. For example, if n bits are stored in an int array, 32n bits of memory will be used, but a corresponding bitset only requires n bits of memory. In addition, the values of a bitset can be efﬁciently manipulated using bit operators, which makes it possible to optimize algorithms using bit sets**
+
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    bitset<10> s;
+    s[1]=1;
+    s[3]=1;
+    s[4]=0;
+    cout<<s[0]<<"  "<<s[1]<<"  "<<s[2]<<"  "<<s[3]<<"  "<<s[4];
+
+    return 0;
+
+}
+0  1  0  1  0
+```
+
+
+2. Elements can be inserted in the following manner too.
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    bitset<10> s(string("0101010101"));  //right to left assignment
+
+    cout<<s[0]<<"  "<<s[1]<<"  "<<s[2]<<"  "<<s[3]<<"  "<<s[4]<<"  "<<s[5]<<"  "<<s[6]<<"  "<<s[7]<<"  "<<s[8]<<"  "<<s[9];
+
+    return 0;
+
+}
+
+```
+
+
+
+3. Some operations &,|,^
+
+
+```c++
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    bitset<10> a(string("0101010101"));
+    bitset<10> b(string("1010101010"));
+
+    cout<<" &  operation "<<(a&b)<<endl;
+    cout<<" |  operation "<<(a|b)<<endl;
+    cout<<" ^  operation "<<(a^b)<<endl;
+
+
+    return 0;
+
+}
+
+ &  operation 0000000000
+ |  operation 1111111111
+ ^  operation 1111111111
+
+
+```
+
+
+
+# Deque 
+
+1. push_front(),pop_front() functions are available as compared to vector
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+
+    deque<int> d;
+    d.push_back(10);
+    d.push_back(11);
+    d.push_back(112);
+    d.push_back(101);
+
+    for(auto x:d){
+        cout<<x<<"    ";
+    }
+
+    d.pop_back();
+    d.pop_back();
+    d.pop_back();
+
+    cout<<endl;
+
+    cout<<endl<<" after performing  pop"<<endl;
+
+    for(auto x:d){
+        cout<<x<<"    ";
+    }
+    cout<<endl;
+
+    cout<<endl<<" inserting elements in front , this we can't do in vector"<<endl;
+
+
+    d.push_front(7);
+    d.push_front(9);
+    d.push_front(11);
+
+
+
+    for(auto x:d){
+        cout<<x<<"    ";
+    }
+
+
+    d.pop_front();
+
+    cout<<endl;
+    cout<<endl<<"  pop front operation "<<endl;
+
+    for(auto x:d){
+        cout<<x<<"    ";
+    }
+
+
+    return 0;
+
+}
+
+10    11    112    101
+
+ after performing  pop
+10
+
+ inserting elements in front , this we can't do in vector
+11    9    7    10
+
+  pop front operation
+9    7    10
+
+```
+
+
+
+
+---
+
+
+
+# Stack
+
+1. A stack is a data structure that provides two O(1) time operations: adding an element to the top, and removing an element from the top. It is only possible to access the top element of a stack.
+
+
+2. 
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    stack<int> s;
+    s.push(4);
+    s.push(11);
+    s.push(1);
+
+    cout<<endl<<s.top();
+
+    s.pop();
+
+    cout<<endl<<s.top();
+
+
+    s.pop();
+
+    cout<<endl<<s.top();
+
+    return 0;
+
+}
+
+
+```
+
+
+
+
+# Queue
+
+1. A queue also provides two O(1) time operations: adding an element to the end of the queue, and removing the ﬁrst element in the queue. It is only possible to access the ﬁrst and last element of a queue.
+
+
+2. Need to perform further operations.
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    queue<int> q;
+    q.push(11);
+    q.push(12);
+    q.push(34);
+    q.push(344);
+
+    cout<<q.front();
+
+
+    return 0;
+
+}
+
+```
+
+
+---
+
+
+# Priority Queue
+
+1. A priority queue maintains a set of elements. The supported operations are insertion and, depending on the type of the queue, retrieval and removal of either the minimum or maximum element. Insertion and removal take O(logn) time, and retrieval takes O(1) time. While an ordered set efﬁciently supports all the operations of a priority queue, the beneﬁt of using a priority queue is that it has smaller constant factors.
+
+2. A priority queue is usually implemented using a heap structure that is much simpler than a balanced binary tree used in an ordered set. By default, the elements in a C++ priority queue are sorted in decreasing order, and it is possible to ﬁnd and remove the largest element in the queue.
+
+
+3. 34 is displayed on top not 1 as this maintains the order
+
+```c++
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+
+    priority_queue<int> q;
+    q.push(3);
+    q.push(4);
+    q.push(34);
+    q.push(1);
+
+    cout<<q.top();
+
+    return 0;
+
+}
+
+
+```
+
+
+4. If we want to create a priority queue that supports ﬁnding and removing the smallest element, we can do it as follows.
+
+**Perform some more operations**
+
+:yellow_heart:
+
+```c++
+
+
+#include<bits/stdc++.h>
+
+using namespace std;
+
+int main(){
+
+    priority_queue<int,vector<int>,greater<int>> q;
+    q.push(2);
+    q.push(34);
+    q.push(345);
+
+
+    cout<<q.top();
+
+    return 0;
+
+}
+
+
+
+
+```
+
+
+
+
+
+
+---
