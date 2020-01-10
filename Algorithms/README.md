@@ -171,7 +171,6 @@ using namespace std;
 
 
 
-
 int partitions(int a[],int low,int up){
     int pivot=a[low];
     int i=low+1;
@@ -187,7 +186,7 @@ int partitions(int a[],int low,int up){
         if(i<j){
             swap(a[i],a[j]);
             i+=1;
-            j+=1;
+            j-=1;
         }
         else{
             break;
