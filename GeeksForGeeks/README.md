@@ -4,7 +4,6 @@
 
 ```c++
 #include<bits/stdc++.h>
-
 #define NIL -1
 #define MAX 100
 
@@ -30,7 +29,6 @@ int fibonacci(int n){
     return lookup[n];
 
 }
-
 
 int main(){
     int n=20;
@@ -99,7 +97,6 @@ int lis(int arr[],int n){
         lis[i]=1;
     }
 
-
     for(int i=1;i<n;i++){
         for(int j=0;j<i;j++){
             if(arr[i]>arr[j] &&lis[i]<lis[j]+1){
@@ -130,7 +127,6 @@ int main(){
 
 
 ```
-
 
 4. **Longest Common subsequence**
 
@@ -182,7 +178,6 @@ int main(){
     return 0;
 }
 ```
-
 
 5. Edit distance
 
