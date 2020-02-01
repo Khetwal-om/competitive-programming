@@ -1,5 +1,5 @@
 
-#Introduction to pointers
+# Introduction to pointers
 
 1. Pointers -> variables that store address of other variables
 
@@ -44,7 +44,7 @@ Eventually value at p24
 ```
 
 
-```cmake
+```c
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -64,8 +64,7 @@ int main(){
 
 2. Pointer Arithmetic
 
-```cmake
-
+```c
 
 
 #include <bits/stdc++.h>
@@ -90,7 +89,7 @@ p+2  6422304
 ---
 
 
-```cmake
+```c
 
 
 
@@ -132,7 +131,7 @@ addresses but to dereference these references to access/change value.
 
 
 
-```cmake
+```c
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -168,7 +167,7 @@ size of char is 1 bytes
 
 
 
-```cmake
+```c
 
 
 #include <bits/stdc++.h>
@@ -204,7 +203,7 @@ size of char is 1 bytes
 ---
 
 
-```cmake
+```c
 
 
 #include <bits/stdc++.h>
@@ -248,7 +247,7 @@ address = 6422294 , value =0
 
 *void pointer*
 
-```cmake
+```c
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -295,7 +294,7 @@ address = 6422292
 1. 
 
 
-```cmake
+```c
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -329,7 +328,7 @@ int main(){
 2.
 
 
-```cmake
+```c
 
 #include <bits/stdc++.h>
 using namespace std;
@@ -354,4 +353,145 @@ a 25
 
 
 
-3. 
+# Pointers and Arrays
+
+```c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int K[]={1,2,3,4};
+    printf("%d   %d\n",K,*K);
+    printf("%d   %d\n",K+1,*(K+1));
+    printf("%d   %d\n",K+2,*(K+2));
+    printf("%d   %d\n",K+3,*(K+3));
+
+
+    return 0;
+}
+
+
+
+6422288   1
+6422292   2
+6422296   3
+6422300   4
+
+```
+
+
+
+*Try to fix this*
+
+```c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void sumOfArray(int K[]){
+    printf("The size of K within sumOfArray is %d",sizeof(K));
+
+}
+int main(){
+    int K[]={1,2,3,4};
+    printf("The size of K within main is %d\n",sizeof(K));
+    sumOfArray(K);
+    return 0;
+}
+
+The size of K within main is 16
+The size of K within sumOfArray is 4
+
+
+```
+
+
+**int *K = int K[]**
+
+
+```c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void sumOfArray(int *K){
+    printf("The size of K within sumOfArray is %d",sizeof(K));
+
+}
+int main(){
+    int K[]={1,2,3,4};
+    printf("The size of K within main is %d\n",sizeof(K));
+    sumOfArray(K);
+    return 0;
+}
+
+
+
+
+```
+
+
+# Arrays as function argument
+
+```c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void sumOfArray(int K[],int size){
+     int i=0;
+
+     for(i=0;i<size;i++){
+         K[i]=2*i;
+     }
+
+
+}
+int main(){
+    int K[]={1,2,3,4};
+    int size=sizeof(K)/sizeof(K[0]);
+    sumOfArray(K,size);
+
+    int i=0;
+    for(i=0;i<size;i++){
+        printf("%d ",K[i]);
+    }
+    return 0;
+}
+
+
+
+```
+
+
+
+---
+
+# Character arrays and pointers 
+
+
+```c
+
+#include <bits/stdc++.h>
+using namespace std;
+
+void print(char *value){
+    while(*value!='\0'){
+        printf("%c",*value);
+        value+=1;
+    }
+}
+int main(){
+
+    char value[10]="Hello";
+    print(value);
+    return 0;
+}
+
+
+```
+
+---
+
+
