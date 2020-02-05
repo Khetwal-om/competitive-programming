@@ -105,3 +105,63 @@ int main(){
 ```
 
 
+
+
+3. Micro and Array Update
+
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    int n, t, k,small;
+    cin >> t;
+//    cin >> n >> k;
+    vector<int> v;
+
+
+
+
+    for (int i = 0; i < t; i++) {
+
+        cin >> n >> k;
+        int A[n];
+
+
+        for (int p = 0; p < n; p++) {
+            cin >> A[p];
+        }
+
+
+
+
+        small=*min_element(A,A+n);
+
+
+
+        v.push_back(k-small);
+    }
+
+
+    for(auto x:v){
+        if(x<0)
+        {
+            x=0;
+            cout<<x<<" "<<endl;
+        }
+        else{
+            cout<<x<<" "<<endl;
+        }
+
+    }
+
+
+    return 0;
+
+
+}
+
+```
