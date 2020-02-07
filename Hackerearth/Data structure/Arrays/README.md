@@ -440,3 +440,96 @@ int main(){
 
 
 
+
+
+
+
+
+4. Polygon possibility
+
+:heart:
+
+
+**Property of a polygon is that sum of largest side is always smaller than sum of the
+rest of the sides**
+
+
+```c++
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int main() {
+
+    int T, N;
+    vector<int> values;
+    vector<string> answers;
+    int sum = 0, rest = 0;
+    int element;
+    int maximum;
+
+    cin >> T;
+
+
+    for (int i = 0; i < T; i++) {
+        cin >> N;
+
+        for (int j = 0; j < N; j++) {
+            cin >> element;
+            values.push_back(element);
+        }
+        sum = accumulate(values.begin(), values.end(), 0);
+        maximum = *max_element(values.begin(), values.end());
+        rest = sum - maximum;
+
+        if (maximum < rest) {
+            answers.emplace_back("Yes");
+        } else {
+            answers.emplace_back("No");
+        }
+
+        rest=0;
+        sum=0;
+        maximum=0;
+        values.clear();
+        N=0;
+    }
+
+    for(auto x:answers){
+        cout<<x<<endl;
+    }
+
+
+//   find max(elements)
+//   check if max<sum of all elements other than max
+//   sum of rest elements  sum(elements)-max;
+//   if   yes,  print Yes else No
+
+
+}
+
+
+
+"A:\Competitive programming\Cplusplusworkbench\cmake-build-debug\Cplusplusworkbench.exe"
+2
+3
+4 3 2
+4
+1 2 1 42
+3
+4 3 2
+4
+1 2 1 4
+
+Yes
+        No
+
+
+
+Process finished with exit code 0
+
+
+
+```

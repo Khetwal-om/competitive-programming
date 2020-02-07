@@ -2443,7 +2443,135 @@ int isEmpty(){
 
 
 
+```c
 
+
+
+#include<stdio.h>
+#include <stdlib.h>
+
+
+
+struct node {
+    int priority;
+    int info;
+    struct node *link;
+};
+
+
+
+struct node *front;
+
+
+void initializeQueue();
+void insert(int element,int elementPriority);
+
+int Delete();
+void display();
+int isEmpty();
+
+
+int main(){
+    int choice,element,elementPriority;
+
+
+    initializeQueue();
+
+    while(1){
+        printf("1. Insert a new element\n");
+        printf("2. Delete an element\n");
+        printf("3. Display the queue\n");
+        printf("4. Bye\n");
+        printf("Take your pick\n");
+        scanf("%d",&choice);
+
+        if(choice==4)
+            break;
+
+        switch(choice){
+            case 1:
+                printf("Enter the element to be inserted\n");
+                scanf("%d",&element);
+                printf("Enter its priority \n");
+                scanf("%d",&elementPriority);
+                insert(element,elementPriority);
+                break;
+
+            case 2:
+                printf("Deleted element is %d\n",Delete());
+                break;
+
+            case 3:
+                display();
+                break;
+
+            default:
+                printf("Wrong choice\n");
+
+
+        }
+
+    }
+}
+
+
+
+void initializeQueue(){
+    front=NULL;
+}
+
+
+void insert(int element,int elementPriority){
+    struct node *temp,*p;
+    temp=(struct node *)malloc(sizeof(struct node));
+
+    if(isEmpty()|| elementPriority<front->priority){
+        temp->link=front;
+        front=temp;
+    }
+    else {
+
+        p = front;
+
+        while (p->link != NULL && p->link->priority <= elementPriority) {
+            p = p->link;
+        }
+
+        temp->link = p->link;
+        p->link = temp;
+    }
+
+}
+
+int Delete(){
+    struct node *temp;
+    int element;
+    if(isEmpty()){
+        printf("Queue underflow\n");
+        exit(1);
+    }
+
+    else{
+        temp=front;
+        element
+    }
+}
+
+
+void display(){
+
+}
+
+
+
+int isEmpty(){
+
+}
+
+
+
+
+```
 
 
 
