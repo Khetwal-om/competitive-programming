@@ -749,6 +749,132 @@ struct node *reverseList(struct node *start){
 ```
 
 
+---
+
+### Insert a node before a specified node. I did this on my own.
+
+:heart:
+
+:+1:
+
+:yellow_heart:
+
+```c
+
+struct node *insertBefore(struct node *start,int data,int x){
+
+    struct node *temp=(struct node *)malloc(sizeof(struct node));
+
+    struct node *p;
+
+    if(start->info==x){
+        temp->info=data;
+        temp->prev=NULL;
+        temp->next=start;
+        start->prev=temp;
+        start=temp;
+        return start;
+    }
+
+    p=start;
+
+    while(p->next!=NULL){
+        if(p->next->info==x){
+            break;
+        }
+        p=p->next;
+    }
+
+    if(p->next==NULL){
+        printf("The element ain't found \n");
+
+    }
+    else
+     {
+      temp->info=data;
+      temp->prev=p;
+      temp->next=p->next;
+      p->next->prev=temp;
+      p->next=temp;
+
+     }
+
+    return start;
+
+}
+
+
+```
+
+
+
+---
+
+
+
+
+---
+
+### Insert after a specified node
+
+
+```c
+
+
+
+void insertAfter(struct node *start,int data,int x){
+
+    struct node *temp=(struct node *)malloc(sizeof(struct node));
+
+    struct node *p=start;
+
+    while(p!=NULL){
+        if(p->info==x){
+            break;
+        }
+        p=p->next;
+    }
+
+
+    if(p==NULL){
+        printf("Common  \n");
+    }
+
+    else{
+
+        if(p->next==NULL){
+
+        temp->info=data;
+        temp->next=NULL;
+        temp->prev=p;
+        p->next=temp;
+        }
+        else{
+
+        temp->info=data;
+        temp->next=p->next;
+        temp->prev=p;
+        p->next->prev=temp;
+        p->next=temp;
+
+        }
+    }
+
+
+
+
+}
+
+```
+
+
+
+
+---
+
+
+
+
 3. *Circular linked list*
 
 ```c
@@ -2003,6 +2129,9 @@ void display(){
 ```
 
 
+
+
+
 5. *Implementation of queue using circular  linked list*
 
 
@@ -2199,6 +2328,128 @@ void display(){
 }
 
 ```
+
+
+
+---
+
+# Priority Queue using linked list
+
+
+```c
+
+
+#include<stdio.h>
+#include <stdlib.h>
+
+
+
+struct node {
+    int priority;
+    int info;
+    struct node *liik;
+};
+
+
+
+struct node *front;
+
+
+void initializeQueue();
+void insert(int element,int elementPriority);
+
+int Delete();
+void display();
+int isEmpty();
+
+
+int main(){
+    int choice,element,elementPriority;
+
+
+    initializeQueue();
+
+    while(1){
+        printf("1. Insert a new element\n");
+        printf("2. Delete an element\n");
+        printf("3. Display the queue\n");
+        printf("4. Bye\n");
+        printf("Take your pick\n");
+        scanf("%d",&choice);
+
+        if(choice==4)
+            break;
+
+        switch(choice){
+            case 1:
+                printf("Enter the element to be inserted\n");
+                scanf("%d",&element);
+                printf("Enter its priority \n");
+                scanf("%d",&elementPriority);
+                insert(element,elementPriority);
+                break;
+
+            case 2:
+                printf("Deleted element is %d\n",Delete());
+                break;
+
+            case 3:
+                display();
+                break;
+
+            default:
+                printf("Wrong choice\n");
+
+
+        }
+
+    }
+}
+
+
+
+void initializeQueue(){
+
+}
+
+
+void insert(int element,int elementPriority){
+
+}
+
+int Delete(){
+
+}
+
+
+void display(){
+
+}
+
+
+
+int isEmpty(){
+
+}
+
+
+
+```
+
+
+
+
+**Implementation**
+
+
+
+
+
+
+
+---
+
+
 
 
 ---
