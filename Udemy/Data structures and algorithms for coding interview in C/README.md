@@ -52,4 +52,5 @@ You may assume that each input would have exactly one solution, and you may not 
 
 5. 
 
-![n^2](24A.png)
+![n^2 ](24A.png)
+
