@@ -1357,3 +1357,203 @@ int main()
     }
 }
 ```
+
+
+
+# Final submission 
+
+**The values are large enough use long , lld**
+
+```c++
+#include <bits/stdc++.h>
+
+typedef long long int lld;
+using namespace std;
+
+int main(){
+
+    int T,N,K;
+    int *Alice;
+    int *Bob;
+    lld maximum=-1;
+    lld answer=0;
+    cin>>T;
+
+    while (T>0){
+
+        cin>>N>>K;
+        Alice=(int *)malloc(sizeof(int)*N);
+        Bob=(int *)malloc(sizeof(int)*N);
+
+        for(long i=0;i<N;i++){
+            cin>>Alice[i];
+        }
+
+
+        for(long i=0;i<N;i++){
+            cin>>Bob[i];
+        }
+
+
+        maximum=*max_element(Bob,Bob+N)+1;
+        for(long k=0;k<N;k++){
+            if(Alice[k]<maximum)
+            {
+                answer+=((maximum-Alice[k])*K);
+            }
+        }
+        cout<<answer<<endl;
+        answer=0;
+        maximum=-1;
+        free(Alice);
+        free(Bob);
+        T--;
+    }
+
+}
+
+
+```
+
+
+
+### Misc
+
+**size_t and npos**
+
+
+```c++
+
+// CPP program to demonstrate working of string
+// find to search a string
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+
+    string first="hello  how are you  , hello ";
+    string second="hello";
+
+    int found=first.find(second);
+    if(found != string::npos){
+        cout<<"found at "<<found; 
+    }
+    return 0;
+}
+
+
+```
+
+
+### Medium
+
+
+1. Can you solve it
+
+```c++
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main()
+{
+    int T;
+    cin>>T;
+
+    int N;
+    int max=-1;
+
+    while(T>0){
+
+        cin>>N;
+        int *values=(int *)malloc(sizeof(int)*N);
+        for (int i = 0; i < N; ++i) {
+            cin>>values[i];
+        }
+
+        for(int i=0;i<N-1;i++){
+            for (int j = i+1; j < N; ++j) {
+                if(abs(i-j)+abs(values[i]-values[j])>max){
+                    max=abs(i-j)+abs(values[i]-values[j])>max;
+                }
+            }
+
+        }
+        cout<<max<<endl;
+
+        free(values);
+        max=-1;
+
+
+
+        T--;
+    }
+
+    return 0;
+}
+
+
+```
+
+
+
+### Jarvis 
+
+
+1. Partial submission
+
+```c++
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int main() {
+
+    int T;
+    vector<int> coaches;
+    int remainder=0;
+    int element,count=0,flag=0;
+    cin>>T;
+
+    while(T>0){
+        cin >> element;
+        while (element != 0) {
+            remainder = element % 10;
+            coaches.push_back(remainder);
+            element /= 10;
+            count += 1;
+        }
+        sort(coaches.begin(), coaches.end());
+        for (int m = 0; m < count; m++) {
+            if (abs(coaches[m] - coaches[m - 1]) != 1) {
+                flag = 1;
+                cout << "NO" << endl;
+                break;
+            }
+        }
+        if(flag==0) {
+            cout << "YES" << endl;
+        }
+        coaches.erase(coaches.begin(), coaches.end());
+        flag = 0;
+        count = 0;
+        element = 0;
+        T--;
+    }
+
+
+
+}
+
+//    while taking input check
+//    u don't really have to store the elements
+//    take  in put for  just push_back the individual elements right away.
+//    sort this  now if the difference between the elements!=1 break .
+
+
+```
