@@ -1557,3 +1557,224 @@ int main() {
 
 
 ```
+
+
+:+1:
+
+
+# This approach gives you the occurence of each character in string,number
+
+---
+
+```c++
+
+#include <bits/stdc++.h>
+typedef long long int lld;
+using namespace std;
+
+
+int main() {
+     int i=0;
+     int minimum=INT_MAX;
+     int maximum=INT_MIN;
+     string s;
+     int a[10]={0};
+     cin>>s;
+
+
+     while (i<s.length()){
+         minimum=min(minimum,s[i]-'1'+1);
+         maximum=max(maximum,s[i]-'1'+1);
+         a[(s[i]-'1'+1)]+=1;
+         i++;
+     }
+
+     for(int i=minimum;i<=maximum;i++){
+         cout<< a[i]<<"  ";
+     }
+
+
+}
+
+//    while taking input check
+//    u don't really have to store the elements
+//    take  in put for  just push_back the individual elements right away.
+//    sort this  now if the difference between the elements!=1 break .
+
+
+
+```
+
+
+---
+
+
+
+
+
+## Monk and power of time . I did bad.           :(
+
+```c++
+#include<iostream>
+#include<queue>
+using namespace std;
+ 
+int main()
+{
+    int n,m;
+    cin >> n;
+    
+    queue<int> calling,ideal;
+    
+    for(int i=0;i<n;i++)
+    {
+        cin >> m;
+        calling.push(m);
+    }
+    
+    for(int i=0;i<n;i++)
+    {
+        cin >> m;
+        ideal.push(m);
+    }
+    long long int count=0;
+    
+    while(!calling.empty())
+    {
+        if(calling.front() == ideal.front())
+        {
+            count++;
+            calling.pop();
+            ideal.pop();
+        }
+        else
+        {
+            int val = calling.front();
+            calling.pop();
+            calling.push(val);
+            count++;
+        }
+    }
+    
+    cout << count << endl;
+    
+    
+    return 0;
+}
+
+```
+
+
+
+
+### Fix
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+
+    queue<int> calling;
+    queue<int> ideal;
+    int data;
+    int count=0;
+
+    int N;
+    cin>>N;
+
+    for(int i=0;i<N;i++){
+        cin>>data;
+        calling.push(data);
+    }
+
+
+    for(int m=0;m<N;m++){
+        cin>>data;
+        ideal.push(data);
+
+    }
+
+    while (!ideal.empty()){
+
+        if(ideal.front()==calling.front()){
+            count+=1;
+            ideal.pop();
+            calling.pop();
+        }
+        else{
+             int callingFront=calling.front();
+             calling.pop();
+             calling.push(callingFront);
+             count+=1;
+        }
+
+    }
+
+    cout<<count;
+
+
+
+
+}
+//
+//int i=0;
+//int minimum=INT_MAX;
+//int maximum=INT_MIN;
+//string s;
+//int a[10]={0};
+//cin>>s;
+//
+//
+//while (i<s.length()){
+//minimum=min(minimum,s[i]-'1'+1);
+//maximum=max(maximum,s[i]-'1'+1);
+//a[(s[i]-'1'+1)]+=1;
+//i++;
+//}
+//
+//for(int i=minimum;i<=maximum;i++){
+//cout<< a[i]<<"  ";
+//}
+
+
+```
+
+
+
+
+### Misc
+
+**Rotate a string**
+
+```c++
+
+// C++ program to demonstrate working of rotate
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    string str = "ABCD";
+
+    // Rotating arround second element
+    // string becomes "BCDA"
+    rotate(str.begin(), str.begin()+1, str.end());
+    cout << str << endl;
+
+    // Again rotating around second element
+    // string becomes "CDAB"
+    rotate(str.begin(), str.begin()+1, str.end());
+    cout << str<<endl;
+
+//    rotate around second again
+
+    rotate(str.begin(),str.begin()+1,str.end());
+    cout<<str;
+
+    return 0;
+}
+
+
+```

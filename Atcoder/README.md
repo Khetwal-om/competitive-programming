@@ -875,3 +875,87 @@ int main(){
 
 
     map<int,int>::iterator itr;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Atcoder beginner contest 155
+
+
+1. A poor . 2 test cases 
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int A,B,C;
+    cin>>A>>B>>C;
+
+    if(A!=B && A!=C){
+        cout<<"No";
+    }
+    else if(A==0 || B==0 || C==0){
+        cout<<"No";
+    }
+    else{
+        if(A==B && A!=C){
+            cout<<"Yes";
+        }
+        else if(B==C && B!=A){
+            cout<<"Yes";
+        }
+        else if(A==C && C!=B){
+            cout<<"Yes";
+        }
+        else{
+            cout<<"No";
+        }
+    }
+    return 0;
+}
+
+```
+
+
+
+### Issue fixed
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+int main(){
+    int N;
+    int flag=0;
+    cin>>N;
+    int element;
+    for(int i=0;i<N;i++){
+        cin>>element;
+        if(element%2==0){
+            if(element%3==0 || element%5==0){
+
+            }
+            else{
+                cout<<"DENIED";
+                flag=1;
+                break;
+            }
+        }
+    }
+    if(flag==0){
+        cout<<"APPROVED";
+    }
+
+
+    return 0;
+}
+```
