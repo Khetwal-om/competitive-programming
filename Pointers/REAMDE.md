@@ -495,3 +495,417 @@ int main(){
 ---
 
 
+
+
+
+
+
+### Structure Basics
+
+```c
+
+
+
+
+
+
+1. Structure in c
+
+```c
+
+#include <stdio.h>
+
+
+struct book{
+    char title[20];
+    char author[20];
+    int pages;
+};
+
+int main() {
+
+    struct book oxford={"yeah","john",200};
+    printf("%s",oxford.title);
+    printf("%s",oxford.author);
+    printf("%d",oxford.pages);
+    return 0;
+}
+```
+
+
+
+
+2. Taking input from the user.
+
+
+
+```c 
+#include <stdio.h>
+struct book{
+    char title[20];
+    char author[20];
+    int pages;
+};
+
+int main() {
+
+    struct book oxford;
+    scanf("%s",oxford.title);
+    scanf("%s",oxford.author);
+    scanf("%d",&oxford.pages);
+
+
+    printf("%s",oxford.title);
+    printf("%s",oxford.author);
+    printf("%d",oxford.pages);
+    return 0;
+}
+```
+
+3. Array of structure.
+
+```c
+
+#include <stdio.h>
+
+
+struct marks{
+    int os;
+    int dbms;
+    int c;
+};
+
+int main() {
+
+    struct marks student[3];
+
+    student[0].c=100;
+    student[0].dbms=100;
+    student[0].os=99;
+
+    student[1].c=81;
+    student[1].dbms=81;
+    student[1].os=91;
+
+    student[2].c=80;
+    student[2].dbms=80;
+    student[2].os=90;
+
+    for(int i=0;i<=2;i++){
+        printf("student %d c=%d dbms=%d os=%d\n",i,student[i].dbms,student[i].c,student[i].os);
+    }
+    return 0;
+}
+
+student 0 c=100 dbms=100 os=99
+student 1 c=81 dbms=81 os=91
+student 2 c=80 dbms=80 os=90
+
+
+```
+
+
+
+3. Return type as of structure
+
+
+```c
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+struct student{
+    char name[20];
+    int roll;
+};
+void display(struct student *);
+struct student *function();
+int main() {
+    struct student *a;
+    a=function();
+    display(a);
+    return 0;
+}
+
+struct student *function(){
+    struct student *harry;
+    harry=(struct student *)malloc(sizeof(struct student));
+    strcpy(harry->name,"yeah");
+    harry->roll=101;
+}
+
+void display(struct student *a){
+    printf("%d",a->roll);
+    printf("%s",a->name);
+}
+
+```
+
+
+
+
+### Basics of structure
+
+
+
+
+
+
+
+1. Structure in c
+
+```c
+
+#include <stdio.h>
+
+
+struct book{
+    char title[20];
+    char author[20];
+    int pages;
+};
+
+int main() {
+
+    struct book oxford={"yeah","john",200};
+    printf("%s",oxford.title);
+    printf("%s",oxford.author);
+    printf("%d",oxford.pages);
+    return 0;
+}
+```
+
+
+
+
+2. Taking input from the user.
+
+
+
+```c 
+#include <stdio.h>
+struct book{
+    char title[20];
+    char author[20];
+    int pages;
+};
+
+int main() {
+
+    struct book oxford;
+    scanf("%s",oxford.title);
+    scanf("%s",oxford.author);
+    scanf("%d",&oxford.pages);
+
+
+    printf("%s",oxford.title);
+    printf("%s",oxford.author);
+    printf("%d",oxford.pages);
+    return 0;
+}
+```
+
+3. Array of structure.
+
+```c
+
+#include <stdio.h>
+
+
+struct marks{
+    int os;
+    int dbms;
+    int c;
+};
+
+int main() {
+
+    struct marks student[3];
+
+    student[0].c=100;
+    student[0].dbms=100;
+    student[0].os=99;
+
+    student[1].c=81;
+    student[1].dbms=81;
+    student[1].os=91;
+
+    student[2].c=80;
+    student[2].dbms=80;
+    student[2].os=90;
+
+    for(int i=0;i<=2;i++){
+        printf("student %d c=%d dbms=%d os=%d\n",i,student[i].dbms,student[i].c,student[i].os);
+    }
+    return 0;
+}
+
+student 0 c=100 dbms=100 os=99
+student 1 c=81 dbms=81 os=91
+student 2 c=80 dbms=80 os=90
+
+
+```
+
+
+
+3. Return type as of structure
+
+
+```c
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+struct student{
+    char name[20];
+    int roll;
+};
+void display(struct student *);
+struct student *function();
+int main() {
+    struct student *a;
+    a=function();
+    display(a);
+    return 0;
+}
+
+struct student *function(){
+    struct student *harry;
+    harry=(struct student *)malloc(sizeof(struct student));
+    strcpy(harry->name,"yeah");
+    harry->roll=101;
+}
+
+void display(struct student *a){
+    printf("%d",a->roll);
+    printf("%s",a->name);
+}
+
+```
+
+
+
+
+### Basics of structure
+
+
+```c
+
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+
+
+struct node {
+    int info;
+    struct node *link;
+};
+
+int main() {
+
+    struct node *start=NULL;
+    start=(struct node*)malloc(sizeof(struct node));
+
+    struct node *node1,*node2,*node3,*node4,*p;
+    node1=(struct node*)malloc(sizeof(struct node));
+    node2=(struct node*)malloc(sizeof(struct node));
+    node3=(struct node*)malloc(sizeof(struct node));
+    node4=(struct node*)malloc(sizeof(struct node));
+
+    p=(struct node*)malloc(sizeof(struct node));
+
+    start=node1;
+    node1->info=1;
+    node1->link=node2;
+    node2->info=2;
+    node2->link=node3;
+    node3->info=3;
+    node3->link=node4;
+    node4->info=4;
+    node4->link=NULL;
+    p=start;
+
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+
+
+
+//    while (p->link->link!=NULL){
+//        printf("%d",p->info);
+//        p=p->link;
+//    }
+
+    return 0;
+}
+
+
+
+
+
+
+
+```
+
+
+```c
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+
+
+struct node {
+    int info;
+    struct node *link;
+};
+
+int main() {
+
+    struct node *start=NULL;
+    start=(struct node*)malloc(sizeof(struct node));
+
+    struct node *node1,*node2,*node3,*node4,*p;
+    node1=(struct node*)malloc(sizeof(struct node));
+    node2=(struct node*)malloc(sizeof(struct node));
+    node3=(struct node*)malloc(sizeof(struct node));
+    node4=(struct node*)malloc(sizeof(struct node));
+
+    p=(struct node*)malloc(sizeof(struct node));
+
+    start=node1;
+    node1->info=1;
+    node1->link=node2;
+    node2->info=2;
+    node2->link=node3;
+    node3->info=3;
+    node3->link=node4;
+    node4->info=4;
+    node4->link=NULL;
+    p=start;
+
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+    p=p->link;
+    printf("%d\n",p->info);
+
+
+
+//    while (p->link->link!=NULL){
+//        printf("%d",p->info);
+//        p=p->link;
+//    }
+
+    return 0;
+}
+
+
+
+```

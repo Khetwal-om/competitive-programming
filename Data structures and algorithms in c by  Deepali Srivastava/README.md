@@ -3052,3 +3052,303 @@ struct node *deleteNode(struct node *root,int x){
 };
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Recursion
+
+
+1. Sum of digits of the number using recursion.
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int sum(int n){
+    if(n==0)
+        return 0;
+    return (n%10)+sum(n/10);
+}
+
+
+int main(){
+
+    cout<<sum(123456789);
+
+    return 0;
+}
+
+
+```
+
+
+2. Print the number in reverse order using recursion.
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void print(int n){
+    if(n==0)
+        return;
+    printf("%d",n);
+    print(n-1);
+}
+
+
+int main(){
+
+    print(5);
+    return 0;
+}
+
+
+
+```
+
+3. Print the number in ascending order.
+
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void print(int n){
+    if(n==0)
+        return;
+    print(n-1);
+    printf("%d",n);
+
+}
+
+
+int main(){
+
+    print(5);
+    return 0;
+}
+
+```
+
+
+
+4. Print binary equivalent of a decimal number using recursion.
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void decimal(int n){
+    if(n==0)
+        return;
+    decimal(n/2);
+    printf("%d",n%2);
+
+}
+
+
+int main(){
+
+    decimal(15);
+    return 0;
+}
+
+```
+
+
+5. Convert decimal to binary,octal,hexadecimal equivalent.
+
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void convert(int n,int base){
+    if(n==0)
+        return;
+    convert(n/base,base);
+    if(base<10){
+        printf("%d",n%base);
+    }
+    else{
+        printf("%c",(n%base-10)+'A');
+    }
+
+}
+
+
+int main(){
+
+    convert(15,16);
+    return 0;
+}
+
+```
+
+
+6. Exponent of a number.
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int expo(int n,int p){
+
+    if (p==0)
+        return 1;
+    return n*expo(n,p-1);
+}
+
+
+int main(){
+    cout<<expo(2,5);
+    return 0;
+}
+
+
+```
+
+7. To optimize above use __n\*2 \* n\*2__
+
+*This isn't working for odd powers*
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int expo(int n,int p){
+
+    if (p==0)
+        return 1;
+    if (p==1)
+        return n;
+    return expo(n,p/2)*expo(n,p/2);
+}
+
+
+int main(){
+    cout<<expo(2,5);
+    return 0;
+}
+
+```
+
+
+### Euclid's Algorithm to find greatest common divisor.
+
+
+1.
+
+```c++
+gcd(a,b) if(b==0) return a  (base case) 
+gcd(a,b) return gcd(b,a%b)
+```
+
+
+
+
+### Tower of hanoi...
+
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void hanoi(int n,char source,char temp,char dest){
+    if(n==1){
+        cout<<"Move disk"<<n<<"from "<<source<<" to  "<<dest;
+        return;
+    }
+    hanoi(n-1,source,dest,temp);
+    cout<<"Moved disk from "<<source<<" to "<<dest;
+    hanoi(n-1,temp,source,dest);
+}
+
+
+int main(){
+    
+    return 0;
+}
+```
+
+
+
+
+
+---
+
+# Tail Recursion.
+
+
+1. A recursive call is tail recursive if it is the last statement that is executed inside the function. The given is tail recursion.
+
+```c
+
+void print(int n){
+    if(n==0)
+        return;
+    printf("%d",n);
+    print(n-1);
+}
+```
+
+---
+
+
+
+---
+
+2. In functions that return a value, a tail recursive call is a recursive call that
+appears in the return statement but is not a part of an expression.
+
+```c
+
+int GCD(int a,int b){
+    if(b==0){
+        return a;
+    }
+    else{
+        return GCD(b,a%b)''
+    }
+}
+```
+
+**Here it is part of expression. i.e not a tail recursion.**
+
+
+```c
+
+int factorial(int n){
+    if(n==0){
+        return 1;
+    }
+    return n*factorial(n-1);
+}
+
+```
+
+
+
+
+---

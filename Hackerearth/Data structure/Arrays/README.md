@@ -1562,6 +1562,97 @@ int main() {
 :+1:
 
 
+
+
+
+
+
+---
+
+
+:heart:
+
+
+:yellow_heart:
+
+**I did it**
+
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main(){
+    int t;
+    cin>>t;
+    int flag=0;
+    string s;
+    for(int i=0;i<t;i++){
+        cin>>s;
+        sort(s.begin(),s.end());
+
+        for(int i=0;i<s.size()-1;i++){
+            if(((s[i+1]-'1'+1)-(s[i]-'1'+1))!=1){
+//                cout<<(s[i+1]-'1'+1)<<"  "<<(s[i]-'1'+1)<<"   "<<endl;
+//                cout<<"NO  "<<(s[i+1]-'1'+1)-(s[i]-'1'+1)<<endl;
+                cout<<"NO"<<endl;
+                flag=1;
+                break;
+            }
+        }
+
+//        cout<<"WTF"<<flag<<endl<<s;
+
+        if(flag==0){cout<<"YES"<<endl;}
+        flag=0;
+        s.erase(s.begin(),s.end());
+    }
+    return 0;
+}
+
+
+```
+
+
+---
+
+### More intuitive way is to use somewhat like hash
+
+```c++
+    #include<bits/stdc++.h>
+    using namespace std;
+    int main(){
+        int t;
+        cin>>t;
+        while(t--){
+            int n,a[10]={0},mi=INT_MAX,ma=INT_MIN,i=0;
+            string s;
+            cin>>s;
+            while(i<s.length()){
+                mi=min(mi,s[i]-'1'+1);
+                ma=max(ma,s[i]-'1'+1);
+                a[s[i]-'1'+1]+=1;
+                i++;
+            }
+            for(i=mi;i<=ma;i++){
+                if(a[i]!=1){
+                    cout<<"NO\n";
+                    break;
+                }
+            }
+            if(i==ma+1)
+            cout<<"YES\n";
+        }
+    }
+
+
+```
+
+---
+
+
+
 # This approach gives you the occurence of each character in string,number
 
 ---

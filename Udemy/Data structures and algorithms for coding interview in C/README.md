@@ -230,6 +230,10 @@ int main(){
 2. Implementation using vector,which outnumber the hashmap because hash() is used by the
 latter . 
 
+
+
+
+
 ```c++
 
 string s;
@@ -244,5 +248,5 @@ for (int i = 0; i < t.length(); ++i)
     H[t[i]]--;
 }
 for(auto x:H){if(x!=0) return false;}
-
+return true;
 ```
