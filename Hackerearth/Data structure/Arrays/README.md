@@ -1869,3 +1869,177 @@ int main()
 
 
 ```
+
+
+---
+
+:mountain:
+
+1. This is to print power set.
+
+
+```c  
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void checksubstring(int *string,int n){
+
+    unsigned  int power=pow(2,n);
+    for(int i=0;i<power;i++){
+        for(int j=0;j<n;j++){
+            if(i&(1<<j)){
+                cout<<string[j];
+            }
+        }
+        cout<<endl;
+    }
+}
+
+int main(){
+
+    int string[]={1,2,3};
+    checksubstring(string,3);
+
+    return 0;
+}
+
+```
+
+
+
+---
+
+
+
+---
+
+### Charged Up array
+
+**first**
+
+```c  
+#include <bits/stdc++.h>
+using namespace std;
+
+
+int checksubstring(int *values,int n){
+    unordered_map<int,int> H;
+    int total=0;
+
+
+    unsigned  int power=pow(2,n);
+    for(int i=0;i<power;i++){
+        for(int j=0;j<n;j++){
+            if(i&(1<<j)){
+//                cout<<values[j];
+                H[values[j]]++;
+
+            }
+        }
+//        cout<<endl;
+    }
+
+
+//    cout<<"commonmmmmmmmmmmmmmmmmmmmmmmmmmmmmmn"<<endl;
+    for(auto x:H){
+//        cout<<x.first<<" appears "<<x.second<<" times  "<<endl;
+        if(x.first>=x.second)
+            total+=x.first;
+    }
+    return total;
+}
+
+
+
+int main(){
+    int t,n;
+    int *values;
+    cin>>t;
+
+    while (t!=0){
+
+        cin>>n;
+        values=(int *)malloc(sizeof(int)*n);
+        for(int i=0;i<n;i++){
+            cin>>values[i];
+        }
+        cout<<checksubstring(values,n);
+
+        free(values);
+
+        --t;
+    }
+    return 0;
+}
+
+
+//unordered_map<char,int> H;
+//for (int i = 0; i < s.length(); ++i) {
+//H[s[i]]++;
+//}
+
+
+```
+
+---
+
+
+
+### Charged up array
+
+```c++
+#include<bits/stdc++.h>
+using namespace std;
+#define M 1000000007
+
+int solve (vector<long long> values) {
+    // Write your code here
+    long long n=values.size();
+    unordered_map<long long ,long long > H;
+    long long int total=0;
+
+    long long  power=pow(2,n);
+    for(long long i=0;i<power;i++){
+        for(long long j=0;j<n;j++){
+            if(i&(1<<j)){
+                H[values[j]]++;
+            }
+        }
+
+    }
+
+//    (a+b) mod m = (a mod m+b mod m) mod m
+
+    for(auto x:H){
+
+        if(x.first>=x.second)
+            total=(total%M + x.first%M)%M;
+    }
+    return total;
+
+}
+
+int main() {
+
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+    int T;
+    cin >> T;
+    for(int t_i=0; t_i<T; t_i++)
+    {
+        int N;
+        cin >> N;
+        vector<long long> A(N);
+        for(int i_A=0; i_A<N; i_A++)
+        {
+            cin >> A[i_A];
+        }
+
+        int out_;
+        out_ = solve(A);
+        cout << out_;
+        cout << "\n";
+    }
+}
+```

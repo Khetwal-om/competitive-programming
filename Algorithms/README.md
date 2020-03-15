@@ -59,47 +59,40 @@ int main(){
 2. Bubble Sort
 
 ```c++
-#include<bits/stdc++.h>
+
+#include <bits/stdc++.h>
 using namespace std;
 
 
-void swapme(int *a,int *b)
-{
+void swapme(int *first,int *second){
     int temp;
-    temp=*a;
-    *a=*b;
-    *b=temp;
+    temp=*first;
+    *first=*second;
+    *second=temp;
 }
-void bubbleSort(int arr[],int n){
+
+void bubbleSort(int *array,int n){
     for(int i=0;i<n-1;i++){
-        for(int j=i+1;j<n;j++){
-            if(arr[i]>arr[j]){
-                swapme(&arr[i],&arr[j]);
-            }
+        for (int j = 0; j < n-i-1; ++j) {
+            if(array[j]>array[j+1])
+                swapme(&array[j],&array[j+1]);
         }
     }
-
 }
 
-
-void display(int arr[],int n){
-
-    for(int i=0;i<n;i++){
-        cout<<arr[i]<<"   ";
+void printElements(int *array,int n){
+    for (int i = 0; i < n; ++i) {
+        cout<<array[i]<<"   ";
     }
-
-
 }
+
 
 int main(){
-    int arr[]={45,13,67,23,11,1,23,10,19};
-    int n=sizeof(arr)/sizeof(arr[0]);
-    display(arr,n);
-    cout<<endl;
-    bubbleSort(arr,n);
-    display(arr,n);
+    int elements[]={1,34,4,9,341,99,7,11,-1,0,-2};
+    bubbleSort(elements,sizeof(elements)/sizeof(elements[0]));
+    printElements(elements,sizeof(elements)/sizeof(elements[0]));
+    return 0;
 }
-
 
 
 ```
@@ -113,17 +106,11 @@ int main(){
 using namespace std;
 
 
-void swapme(int *a,int *b)
-{
-    int temp;
-    temp=*a;
-    *a=*b;
-    *b=temp;
-}
+
 void insertionSort(int arr[],int n){
     int temp;
     int j;
-    for(int i=0;i<n;i++){
+    for(int i=1;i<n;i++){
         temp=arr[i];
         j=i-1;
         while(j>=0 && arr[j]>temp){
@@ -155,6 +142,48 @@ int main(){
 }
 
 ``` 
+
+
+**using for loop**
+
+---
+
+```c++
+
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void insertionSort(int *array,int n){
+    int temp,i,j;
+    for(i=1;i<n;i++){
+        temp=array[i];
+        for(j=i-1;j>=0&&array[j]>temp;j--)
+        {
+                array[j+1]=array[j];
+        }
+        array[j+1]=temp;
+    }
+}
+
+void printElements(int *array,int n){
+    for (int i = 0; i < n; ++i) {
+        cout<<array[i]<<"   ";
+    }
+}
+
+
+int main(){
+    int elements[]={1,34,4,9,341,99,7,11,-1,0,-2};
+    insertionSort(elements,sizeof(elements)/sizeof(elements[0]));
+    printElements(elements,sizeof(elements)/sizeof(elements[0]));
+    return 0;
+}
+
+```
+
+
+---
 
 
 4. *Quicksort*

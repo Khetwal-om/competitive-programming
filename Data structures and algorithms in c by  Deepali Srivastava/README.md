@@ -3349,6 +3349,6 @@ int factorial(int n){
 ```
 
 
-
+3. In tail recursion nothing is to be done in the unwinding phase.
 
 ---

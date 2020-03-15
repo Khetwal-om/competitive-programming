@@ -217,10 +217,7 @@ int arr [10000 + 10];
 int main()
 {
     ios::sync_with_stdio(false);cin.tie(0);     // decrease the time for cin, cout
-
     string s;
-
-
     cin >>    s         ;
 
     for(int i = s.size() - 1; i >= 0; i--){                                     // traverse in reversed order
