@@ -438,4 +438,275 @@ int main(){
 
 
 
-2. Can we improve it further.
+2. Can we improve it further. **Well done**  O(n)
+
+
+```c++
+#include <bits/stdc++.h>
+using namespace std;
+
+
+void duplicates(vector<int> elements){
+    unordered_map <int,int> dictionary;
+   for(int k=0;k<elements.size();k++){
+       dictionary[k]=0;
+   }
+    for (int i = 0; i < elements.size(); ++i) {
+        dictionary[elements[i]]++;
+    }
+
+    for(auto x:dictionary){
+        cout<<x.first<<"    "<<x.second<<endl;
+    }
+
+    cout<<"*******************************"<<endl;
+
+
+    for(auto x:dictionary){
+        if(x.second>1){
+            cout<<x.first<<"       "<<x.second<<endl;
+        }
+    }
+
+}
+
+int main(){
+    vector<int> elements={1,2,3,4,5,6,7,7,8,1,1,1,1,2,2,3,4,5,6,7,7};
+    duplicates(elements);
+
+
+    return 0;
+}
+
+
+20    0
+19    0
+18    0
+17    0
+16    0
+15    0
+14    0
+13    0
+1
+
+12    0
+11    0
+10    0
+3    2
+2    3
+1    5
+0    0
+4    2
+5    2
+6    2
+7    4
+8    1
+9    0
+*******************************
+3       2
+2       3
+1       5
+4       2
+5       2
+6       2
+7       4
+
+
+
+
+```
+
+
+
+
+
+3. Solution of the  teacher(pedagouge)
+
+2,1,2,1
+```c++
+
+
+vector<int> duplicates(vector<int> elements){
+
+    vector<int> answers;
+    for(int i=0;i<elements.size();i++){
+        int index=abs(elements[i])-1;
+        if(elements[index]<0){
+            answers.push_back(abs(elements[i]))
+    }
+    else{
+        elements[index]=-elements[index];    
+
+    }
+  }
+
+}
+
+
+```
+
+
+
+
+7. Intersection of two arrays.
+
+
+```c++
+
+class Solution {
+public:
+    vector<int> intersection(vector<int>& one, vector<int>& two) {
+        
+    set<int> elements_one;
+    set<int> elements_second;
+    vector<int> firstt;
+    vector<int> secondd;
+    vector<int> answer;
+
+    for(auto x:one){
+        elements_one.insert(x);
+    }
+
+    for(auto x:two){
+        elements_second.insert(x);
+    }
+
+
+    for(auto x:elements_one) firstt.push_back(x);
+    for(auto y:elements_second) secondd.push_back(y);
+
+
+    map<int,int> has;
+//    vector<int,int> has;
+
+
+
+    for (int i = 0; i < firstt.size(); ++i) {
+        has[firstt[i]]++;
+    }
+
+    for (int i = 0; i < secondd.size(); ++i) {
+        has[secondd[i]]--;
+    }
+
+    for(auto x:has){
+        if(x.second==0){
+            answer.push_back(x.first);
+        }
+    }
+
+    return answer;
+
+
+
+    }
+};
+
+
+```
+
+
+
+:heart:
+
+
+99.04 % faster solution . wooooooooohoooooooooooo and u know what,
+memory usage is less than 100% of users.
+
+
+```c++
+class Solution {
+public:
+    vector<int> intersection(vector<int>& one, vector<int>& two) {
+      
+    vector<int> answer;
+    sort(one.begin(),one.end());
+    sort(two.begin(),two.end());
+    set<int> elements;
+
+    int i=0,j=0;
+
+    while(i<one.size()&&j<two.size()){
+        if(one[i]==two[j]){
+            elements.insert(one[i]);
+            i++;
+            j++;
+        }
+        else if(one[i]<two[j]){
+            i++;
+        }
+        else{
+            j++;
+        }
+    }
+    
+    for(auto x:elements){
+        answer.push_back(x);
+    }
+
+
+
+
+    return answer;
+
+
+ 
+
+
+    }
+};
+
+```
+
+
+
+*Editorial*
+
+
+```java
+class Solution {
+  public int[] set_intersection(HashSet<Integer> set1, HashSet<Integer> set2) {
+    int [] output = new int[set1.size()];
+    int idx = 0;
+    for (Integer s : set1)
+      if (set2.contains(s)) output[idx++] = s;
+
+    return Arrays.copyOf(output, idx);
+  }
+
+  public int[] intersection(int[] nums1, int[] nums2) {
+    HashSet<Integer> set1 = new HashSet<Integer>();
+    for (Integer n : nums1) set1.add(n);
+    HashSet<Integer> set2 = new HashSet<Integer>();
+    for (Integer n : nums2) set2.add(n);
+
+    if (set1.size() < set2.size()) return set_intersection(set1, set2);
+    else return set_intersection(set2, set1);
+  }
+}
+```
+
+
+
+*editorial b*
+
+```java
+
+class Solution {
+  public int[] intersection(int[] nums1, int[] nums2) {
+    HashSet<Integer> set1 = new HashSet<Integer>();
+    for (Integer n : nums1) set1.add(n);
+    HashSet<Integer> set2 = new HashSet<Integer>();
+    for (Integer n : nums2) set2.add(n);
+
+    set1.retainAll(set2);
+
+    int [] output = new int[set1.size()];
+    int idx = 0;
+    for (int s : set1) output[idx++] = s;
+    return output;
+  }
+}
+
+
+```
