@@ -290,3 +290,321 @@ public class Unique  {
 
 
 ---
+
+
+
+
+
+
+# Palindrome permutation
+
+
+1. O(n) solution. Only *one* odd occurence is allowed while the even occurences prevail.
+
+```java
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+		System.out.println(isPermutationOfPalindrome("aammi"));
+ 		 
+	}
+	
+	private static boolean isPermutationOfPalindrome(String phrase){
+		int[] table=buildCharFrequencyTable(phrase);
+		return checkMaxOneOdd(table);
+	}
+
+
+	// foundOdd is set to true if any odd occuerence is found once , for the second time it turns out that false value is returned from this function
+
+	private static boolean checkMaxOneOdd(int[] table){
+		boolean foundOdd=false;
+		for(int count:table){
+			if(count%2==1){
+				if(foundOdd){
+					return false;
+				}
+				foundOdd=true;
+			}
+		}
+		return true;
+	}
+
+	private static int getCharNumber(Character c){
+		int a=Character.getNumericValue('a');
+		int z=Character.getNumericValue('z');
+		int val=Character.getNumericValue(c);
+
+		if(a<=val&&val<=z){
+			return val-a;
+		}
+		return -1;
+	}
+
+	private static int[] buildCharFrequencyTable(String phrase){
+		System.out.println(Character.getNumericValue('z'));
+		System.out.println(Character.getNumericValue('a'));
+
+		System.out.println(Character.getNumericValue('z')-Character.getNumericValue('a')+1);
+		int[] table=new int[Character.getNumericValue('z')-Character.getNumericValue('a')+1];
+		for(char c:phrase.toCharArray()){
+			int x=getCharNumber(c);
+			if(x!=-1){
+				table[x]++;
+			}
+		}
+		for(int x:table){
+			System.out.print(" "+x);
+		}
+		return table;
+	}
+}
+```
+
+
+
+2. Another approach
+
+*We can't optimize the big 0 time here since any algorithm will always have to look through the entire
+string. However, we can make some smaller incremental improvements. Because this is a relatively simple
+problem, it can be worthwhile to discuss some small optimizations or at least some tweaks.
+Instead of checking the number of odd counts at the end, we can check as we go along. Then, as soon as
+we get to the end .*
+
+
+```java
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+		System.out.println(isPermutationOfPalindrome("malayalam"));
+ 		 
+	}
+	
+	private static boolean isPermutationOfPalindrome(String phrase){
+		int countOdd=0;
+		int[] table=new int[Character.getNumericValue('z')-Character.getNumericValue('a')+1];
+		for(char c:phrase.toCharArray()){
+			int x=getCharNumber(c);
+			table[x]++;
+			if(table[x]%2==1){
+				countOdd++;
+			}
+			else{
+				countOdd--;
+			}
+		}
+		return countOdd<=1;
+
+	}
+
+
+
+
+
+	private static int getCharNumber(Character c){
+		int a=Character.getNumericValue('a');
+		int z=Character.getNumericValue('z');
+		int val=Character.getNumericValue(c);
+
+		if(a<=val&&val<=z){
+			return val-a;
+		}
+		return -1;
+	}
+}
+ 
+```
+
+
+
+
+---
+
+#### Solution third using bitmask :(
+
+---
+
+
+
+
+
+## 5 One away
+
+---
+
+*Apprach 1*
+
+```java
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+	 
+     	String a = "pie";
+		String b = "pale";
+		boolean isOneEdit = oneEditAway(a, b);
+		System.out.println(a + ", " + b + ": " + isOneEdit);
+	}
+	
+	 
+
+	private static boolean oneEditAway(String first,String second){
+		if(first.length()==second.length()){
+			return oneEditReplace(first,second);
+		}
+		else if(first.length()+1==second.length()){
+			return oneEditInsert(first,second);
+		}
+		else if(first.length()-1==second.length()){
+			return oneEditInsert(second,first);
+		}
+		else{
+			return false;
+		}
+	}
+
+
+
+	private static boolean oneEditReplace(String first,String second){
+		boolean foundDifference=false;
+		for (int i=0; i<first.length(); i++) {
+			if(first.charAt(i)!=second.charAt(i)){
+				if(foundDifference){
+					return false;
+				}
+				foundDifference=true;
+			}
+
+		}
+		return true;
+	}
+
+	private static boolean oneEditInsert(String first,String second){
+		int index1=0;
+		int index2=0;
+		while(index2<second.length()&&index1<first.length()){
+			if(first.charAt(index1)!=second.charAt(index2)){
+				if(index1!=index2){
+					return false;
+				}
+				index2++;
+			}
+			else{
+				++index1;
+				++index2;
+			}
+		}
+		return true;
+	}
+}
+ 
+```
+
+
+*2 Approach two, this is better but I can't make out of this*
+
+
+```java
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+	 
+     	String first = "pales";
+		String second = "pale";
+
+		 
+
+
+		boolean isOneEdit = oneEditAway(first,second);
+		System.out.println(first + ", " + second+ ": " + isOneEdit);
+	}
+	
+	 
+
+	private static boolean oneEditAway(String first,String second){
+ 		if(Math.abs(first.length()-second.length())>1) return false;
+
+
+ 		String one=first.length()<second.length()?first:second;
+ 		String two=first.length()<second.length()?second:first;
+
+ 		int index1=0;
+ 		int index2=0;
+ 		boolean foundDifference=false;
+ 		while(index2<two.length()&&index1<one.length()){
+ 			if(one.charAt(index1)!=two.charAt(index2)){
+ 				if(foundDifference) return false;
+
+ 				foundDifference=true;
+
+ 				if(one.length()==two.length()){
+ 					index1++; // on replace move shorter pointer
+ 				}
+
+
+ 			}
+ 			else{
+ 				++index1;	    //if matching move shorter pointer
+ 			}
+ 			++index2;
+ 		}
+ 		return true;
+	}
+
+}
+ 
+
+```
+
+---
+
+
+
+
+
+### 5. String compression
+
+
+1. My solution **O(n^2)** Naive approach
+ 
+
+
+```java
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+	 
+        String s="aabcccccaaaaax";
+        System.out.println(stringCompression(s));
+
+	}
+
+
+	private static String stringCompression(String s){
+		int count;
+		StringBuilder answer=new StringBuilder("");
+		for (int i=0; i<s.length(); i++) {
+			count=1;
+			char c=s.charAt(i);
+			while((i<s.length()-1)&&c==s.charAt(i+1)){
+				count++;
+				i++;
+			}
+			answer.append(c);
+			answer.append(count);
+		}
+		return answer.toString();
+	}
+
+ 
+}	
+ 
+
+
+
+
+
+
+
+
+```
+
