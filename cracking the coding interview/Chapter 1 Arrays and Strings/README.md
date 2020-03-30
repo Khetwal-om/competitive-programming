@@ -58,6 +58,8 @@ public class Unique  {
 
 
 
+
+
 1. B We can reduce our space usage by a factor of eight by using a bit vector
 
 *Ask this concept*
@@ -602,9 +604,339 @@ public class Unique  {
 
 
 
+```
 
+
+2. Solution from byte by byte 
+
+
+```java
+
+import java.util.*;
+public class Unique  {
+	public static void main(String[] args) {
+	 
+        String s="aabcccccaaaaax";
+        System.out.println(stringCompression(s));
+
+	}
+
+
+	private static String stringCompression(String s){
+		int count=1;
+		StringBuilder answer=new StringBuilder("");
+		for (int i=0; i<s.length(); i++) {
+			if((i<s.length()-1)&&s.charAt(i)==s.charAt(i+1)){
+				count++;
+			}			
+			else{
+				answer.append(s.charAt(i));
+				answer.append(count);
+				count=1;
+			} 
+		} 
+
+		if(s.length()<answer.length()) return s;
+
+		return answer.toString();
+	}
+
+ 
+}	
+ 
 
 
 
 ```
 
+
+
+3. Need to go through the solution of the author once more.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 8 Zero matrix
+
+
+1. My solution just a simple way to do it.  
+
+```java
+ 
+
+public class Unique {
+
+ 	public static void main(String[] args) {
+		 
+ 		int m=3;
+ 		int n=3; 
+ 		int[][] a={{1,0,1},{1,1,1},{1,1,1}};
+ 		int[][] b={{1,0,1},{1,1,1},{1,1,1}};
+
+
+		 for(int i=0;i<n;i++){
+			  for(int j=0;j<m;j++){
+      			if(a[i][j]==0){
+					for(int x=0;x<n;x++){
+		   			 b[i][x]=0;
+					}
+					for(int y=0;y<m;y++){
+					    b[y][j]=0;
+					}		
+		   }
+	}
+		
+
+}
+
+
+	for(int[] x:b){
+		for(int element:x){
+			System.out.print(element+"       ");
+		}
+		System.out.println();
+	}
+
+
+
+
+	}
+}
+
+```
+
+
+
+
+
+
+
+
+2. Solution of the author.
+
+
+
+```java
+
+public class Unique{
+	public static void nullifyRow(int[][] matrix, int row) {
+		for (int j = 0; j < matrix[0].length; j++) {
+			matrix[row][j] = 0;
+		}		
+	}
+
+	public static void nullifyColumn(int[][] matrix, int col) {
+		for (int i = 0; i < matrix.length; i++) {
+			matrix[i][col] = 0;
+		}		
+	}			
+	
+	public static void setZeros(int[][] matrix) {
+		boolean[] row = new boolean[matrix.length];	
+		boolean[] column = new boolean[matrix[0].length];
+
+		// Store the row and column index with value 0
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length;j++) {
+				if (matrix[i][j] == 0) {
+					row[i] = true; 
+					column[j] = true;
+		 		}
+			}
+		}
+		
+		// Nullify rows
+		for (int i = 0; i < row.length; i++) {
+			if (row[i]) {
+				nullifyRow(matrix, i);
+			}
+		}
+		
+		// Nullify columns
+		for (int j = 0; j < column.length; j++) {
+			if (column[j]) {
+				nullifyColumn(matrix, j);
+			}
+		}
+	}	
+	
+	// public static boolean matricesAreEqual(int[][] m1, int[][] m2) {
+	// 	if (m1.length != m2.length || m1[0].length != m2[0].length) {
+	// 		return false;
+	// 	}
+		
+	// 	for (int k = 0; k < m1.length; k++) {
+	// 		for (int j = 0; j < m1[0].length; j++) {
+	// 			if (m1[k][j] != m2[k][j]) {
+	// 				return false;
+	// 			}
+	// 		}
+	// 	}	
+	// 	return true;
+	// }
+	
+	// public static int[][] cloneMatrix(int[][] matrix) {
+	// 	int[][] c = new int[matrix.length][matrix[0].length];
+	// 	for (int i = 0; i < matrix.length; i++) {
+	// 		for (int j = 0; j < matrix[0].length; j++) {
+	// 			c[i][j] = matrix[i][j];
+	// 		}
+	// 	}
+	// 	return c;
+	// }
+	
+	public static void main(String[] args) {
+		int nrows = 10;
+		int ncols = 15;
+		int[][] matrix = AssortedMethods.randomMatrix(nrows, ncols, -10, 10);		
+
+		AssortedMethods.printMatrix(matrix);
+		
+		setZeros(matrix);
+		
+		System.out.println();
+		
+		AssortedMethods.printMatrix(matrix);
+	}
+}
+
+```
+
+
+
+
+
+
+
+### 9. String rotation
+
+
+1. My approach , The position is wrong . The value of K
+
+
+```java
+
+public class Unique{
+	public static void main(String[] args) {
+		
+ 		System.out.println(isSubstring("waterbottle","erbottlewat"));
+
+	}
+
+	public static boolean isSubstring(String s1,String s2){
+		int k=0;
+		for(int i=0;i<s2.length();i++){
+			if(s1.charAt(0)==s2.charAt(i)){
+				k=i;
+				break;
+			}
+		}
+
+		String reversedString=rotate(s2,k);
+		return s1.equals(reversedString);
+
+	}
+
+	public static String rotate(String s,int k){
+
+		int shift=k%s.length();
+
+
+		StringBuilder answer=new StringBuilder("");
+		for (int i=0;i<s.length();i++ ) {
+			
+			answer.append(s.charAt((i+shift)%s.length()));			
+		}
+		return answer.toString();
+	}
+}
+
+
+
+```
+
+
+2. **This solution is of Nick white : only the concept is plagiarized but this is same as above**
+
+```java
+public class Unique{
+	public static void main(String[] args) {
+		
+ 		System.out.println(isSubstring("waterbottle","erbottlewat"));
+
+	}
+
+	public static boolean isSubstring(String s1,String s2){
+			for(int i=0;i<s2.length();i++){
+				if(s1.charAt(0)==)
+			}
+			int k;
+			k=k%s2.length();
+			char[] charArray=s2.toCharArray();
+			reverse(charArray,0,s2.length()-1);
+			reverse(charArray,0,k-1);
+			reverse(charArray,k,s2.length()-1);
+			String rotated=valueOf(charArray);
+			return s1.equals(rotated); 
+
+	}
+
+	public static String reverse(char[] charArray,int start,int end){
+		while(start<end){
+			int temp=charArray[start];
+			charArray[start]=charArray[end];
+			charArray[end]=temp;
+			start++;
+			end--;
+		}
+	}
+}
+```
+
+
+3. *Solution of the author*
+
+:smile:
+
+---
+
+# Fix isSubstring method
+
+
+---
+
+
+```java
+
+public class Unique{
+	public static void main(String[] args) {
+		
+		System.out.println(isRotation("waterbottle","erbottlewat"));
+	}
+
+
+	private static boolean isRotation(String s1,String s2){
+		int size=s1.length();
+		if(size==s2.length()&&size>2){
+			String s1s1=s1+s1;
+			return isSubString(s1s1,s2);
+		}
+		return false;
+	}
+
+}
+
+
+```
