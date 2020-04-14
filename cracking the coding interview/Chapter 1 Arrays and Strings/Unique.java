@@ -1,25 +1,9 @@
 
-
-private class Node{
-	private int val;
-	private Node next;
-}
-
-
-public void dedup(Node n){
-	if(n==null) return ;
-
-	HashSet<Integer> nodes=new HashSet<Integer>();
-	Node prev=null;
-
-	while(n!=null){
-		if(nodes.contains(n.val)){
-			prev.next=n.next;
-		}
-		else{
-			nondes.add(n.val);
-			prev=n;
-		}
-		n=n.next();
+public class Unique{
+	public static void main(String[] args) {
+		char space=' ';
+		String str="BBBBB";
+		char c=(char)(str.charAt(2)|(char)32);
+		System.out.println(c);
 	}
 }
