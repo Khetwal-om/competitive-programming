@@ -94,4 +94,184 @@ void display(nodetype* top){
         printf("%d ",top->info);
         top=top->next;
     }
-}```
+}
+```
+
+
+
+2. Circular linked list : Insertion at the beginning of the list
+
+
+```c++
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+
+typedef struct node{
+    int info;
+    struct node* next;
+}node;
+
+
+node* insert(node* last,int element){
+    node *temp=(node*)malloc(sizeof(node));
+    temp->info=element;
+    if(last==NULL){
+        last=temp;
+        last->next=temp;
+        return last;
+    }
+    temp->next=last->next;
+    last->next=temp;
+
+    return last;
+}
+
+
+
+void display(node* last){
+    node* temp=last->next;
+   
+        do{
+            printf(" %d ",temp->info);
+            temp=temp->next;
+        }
+        while (temp!=last->next);
+
+    
+}
+
+
+int main(){
+    node* head=NULL;
+    int number,option;
+    char choice;
+
+    do{
+        printf("Please select the option \n1. Insert the node\n2. Display the list");
+        scanf("%d",&option);
+        if(option==1){
+            printf("Enter the element to insert\n");
+            scanf("%d",&number);
+            head=insert(head,number);
+        }
+        
+        else if(option==2){
+            if(head!=NULL){
+                display(head);
+            }
+        }
+        else{
+            printf("Wrong option\n");
+        }
+        fflush(stdin);
+        printf("Do you want to continue \n");
+        scanf("%c",&choice);
+    }
+    while (choice=='y');
+
+    return 0;
+}
+
+
+```
+
+
+3. Insertion at the end of the circular linked list :smile:
+
+
+
+```c++
+
+
+
+
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <ctype.h>
+
+
+typedef struct node{
+    int info;
+    struct node* next;
+}node;
+
+
+node* insert(node* last,int element){
+    node *temp=(node*)malloc(sizeof(node));
+    temp->info=element;
+    if(last==NULL){
+        last=temp;
+        last->next=temp;
+        return last;
+    }
+    temp->next=last->next;
+    last->next=temp;
+    last=temp;
+    return last;
+}
+
+
+
+void display(node* last){
+    node* temp=last->next;
+
+        do{
+            printf(" %d ",temp->info);
+            temp=temp->next;
+        }
+        while (temp!=last->next);
+
+
+}
+
+
+int main(){
+    node* head=NULL;
+    int number,option;
+    char choice;
+
+    do{
+        printf("Please select the option \n1. Insert the node\n2. Display the list");
+        scanf("%d",&option);
+        if(option==1){
+            printf("Enter the element to insert\n");
+            scanf("%d",&number);
+            head=insert(head,number);
+        }
+
+        else if(option==2){
+            if(head!=NULL){
+                display(head);
+            }
+        }
+        else{
+            printf("Wrong option\n");
+        }
+        fflush(stdin);
+        printf("Do you want to continue \n");
+        scanf("%c",&choice);
+    }
+    while (choice=='y');
+
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+```
+
+
+
+
+
