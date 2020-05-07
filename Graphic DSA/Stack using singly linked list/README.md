@@ -487,5 +487,6 @@ void display(nodetype* front){
         printf("%d ",front->info);
         front=front->next;
     }
+    printf("%d",front->info);
 }
 ```
